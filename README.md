@@ -1,3 +1,4 @@
+# Projeto Hábitos
 Hábitos
 
 Meu primeiro projeto de site para organização de hábitos. A ideia é criar uma ferramenta simples para acompanhar o dia a dia e, ao mesmo tempo, colocar em prática o que venho aprendendo sobre desenvolvimento web.
