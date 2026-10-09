@@ -1,34 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<h1>
-    Welcome to Our Site
-</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        {{ config('app.name') }}
+    </title>
+    @vite(['resources/css/app.css'])
+</head>
 
-<p>
-    Olá, {{ $name }}
-</p>
+<body>
 
-<p>
-    Seus hábitos são:
-</p>
+  <h1 class="text-3xl font-bold underline text-black-500">
+    Hello world!
 
-<ul>
+  </h1>
 
-    @foreach($habitos as $item)
-    <li>
-        {{ $item }}
-    </li>
-    @endforeach
+</body>
 
-</ul>
-
-@auth
-    <p>
-        Você está logado
-    </p>
-@endauth
-
-@guest
-    <p>
-        Você não está logado
-    </p>
-@endguest
+</html>
