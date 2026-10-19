@@ -1,7 +1,7 @@
-<footer class="bg-white border-top border-t-2 p-4 border-dark">
+<footer class="bg-white border-t-2 p-4">
 
-<p>
-  Criado por Wendell! <a href="#" class="underline">GitHub</a>
+<p class="text-center">
+  Criado por Wendell! <a href="https://github.com/gwendell-DEV16/Habitos-project" class="underline">GitHub</a>
 </p>
 
 </footer>

@@ -8,10 +8,10 @@
     <title>
         {{ config('app.name') }}
     </title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite('resources/css/app.css')
 </head>
 
-<body style="background-color: #FFEDD6;">
+<body class="bg-[#FFEDD6]">
 
     {{-- header --}}
     <x-header />
