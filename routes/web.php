@@ -1,8 +1,10 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\Auth\LoginController;
 
-Route::get(uri: '/', action: [App\Http\Controllers\SiteController::class, 'index'])->name('index');
+Route::get('/', [SiteController::class, 'index']);
 
-
-
+Route::get('/login', [LoginController::class, 'index']);
