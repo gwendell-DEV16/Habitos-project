@@ -12,7 +12,7 @@
 
 
 @auth
-    <form class="inline" action="{{ route('logout') }}" method="POST" class="inline">
+    <form class="inline" action="{{ route('auth.logout') }}" method="POST" class="inline">
         @csrf
         <button
             type="submit"
@@ -25,7 +25,7 @@
 
 
 @guest
-    <a href="{{ route('login') }}"
+    <a href="{{ route('site.login') }}"
        class="inline-block cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 hover:bg-gray-100">
         Login
     </a>

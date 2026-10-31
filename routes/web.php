@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\RegisterController;
 
 // SITE
 Route::get('/', [SiteController::class, 'index'])
@@ -11,16 +12,24 @@ Route::get('/', [SiteController::class, 'index'])
 
 // LOGIN
 Route::get('/login', [LoginController::class, 'index'])
-    ->name('login');
+    ->name('site.login');
 
 Route::post('/login', [LoginController::class, 'authenticate'])
-    ->name('authenticate');
+    ->name('auth.login');
+
+//CADASTRO
+Route::get('/cadastro', [RegisterController::class, 'index'])
+    ->name('site.register');
+
+Route::post('/cadastro', [RegisterController::class, 'store'])
+    ->name('auth.register');
+
 
 //DASHBOARD/LOGOUT
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [SiteController::class, 'dashboard'])
-        ->name('dashboard');
+        ->name('site.dashboard');
 
     Route::post('/logout', [LoginController::class, 'logout'])
-        ->name('logout');
+        ->name('auth.logout');
 });
