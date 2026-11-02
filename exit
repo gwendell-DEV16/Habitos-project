@@ -1,0 +1,92 @@
+[1mdiff --git a/app/Models/Habit.php b/app/Models/Habit.php[m
+[1mindex dc2ed0d..ebf642f 100644[m
+[1m--- a/app/Models/Habit.php[m
+[1m+++ b/app/Models/Habit.php[m
+[36m@@ -3,6 +3,9 @@[m
+ namespace App\Models;[m
+ [m
+ use Illuminate\Database\Eloquent\Model;[m
+[32m+[m[32muse Illuminate\Database\Eloquent\Relations\BelongsTo;[m
+[32m+[m[32muse Illuminate\Database\Eloquent\Relations\HasMany;[m
+[32m+[m
+ [m
+ class Habit extends Model[m
+ {[m
+[36m@@ -10,4 +13,17 @@[m [mclass Habit extends Model[m
+         'user_id',[m
+         'name',[m
+     ];[m
+[32m+[m
+[32m+[m[32m   // Um hábito pertence a um usuário![m
+[32m+[m[32m    public function user(): BelongsTo[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return $this->belongsTo(User::class);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // Um hábito pode ter muitos registros de hábitos![m
+[32m+[m
+[32m+[m[32m    public function habitLogs(): HasMany[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return $this->hasMany(HabitLog::class);[m
+[32m+[m[32m    }[m
+ }[m
+[1mdiff --git a/app/Models/HabitLog.php b/app/Models/HabitLog.php[m
+[1mindex dc8355b..414e1fd 100644[m
+[1m--- a/app/Models/HabitLog.php[m
+[1m+++ b/app/Models/HabitLog.php[m
+[36m@@ -3,6 +3,8 @@[m
+ namespace App\Models;[m
+ [m
+ use Illuminate\Database\Eloquent\Model;[m
+[32m+[m[32muse Illuminate\Database\Eloquent\Relations\BelongsTo;[m
+[32m+[m[32muse Illuminate\Database\Eloquent\Relations\HasMany;[m
+ [m
+ class HabitLog extends Model[m
+ {[m
+[36m@@ -11,4 +13,16 @@[m [mclass HabitLog extends Model[m
+         'habit_id',[m
+         'completed_at',[m
+     ];[m
+[32m+[m
+[32m+[m[32m    // Um registro de hábito pertence a um usuário![m
+[32m+[m[32m    public function user(): BelongsTo[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return $this->belongsTo(User::class);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // Um registro de hábito pertence a um hábito![m
+[32m+[m[32m    public function habit(): BelongsTo[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return $this->belongsTo(Habit::class);[m
+[32m+[m[32m    }[m
+ }[m
+[1mdiff --git a/app/Models/User.php b/app/Models/User.php[m
+[1mindex 91e643d..23c9fd7 100644[m
+[1m--- a/app/Models/User.php[m
+[1m+++ b/app/Models/User.php[m
+[36m@@ -2,8 +2,10 @@[m
+ [m
+ namespace App\Models;[m
+ [m
+[32m+[m[32muse Illuminate\Database\Eloquent\Relations;[m
+ use Illuminate\Foundation\Auth\User as Authenticatable;[m
+ use Illuminate\Database\Eloquent\Factories\HasFactory;[m
+[32m+[m[32muse Illuminate\Database\Eloquent\Relations\HasMany;[m
+ use Override;[m
+ [m
+ class User extends Authenticatable[m
+[36m@@ -33,4 +35,14 @@[m [mprotected function casts(): array[m
+ [m
+     }[m
+ [m
+[32m+[m[32m    // Um usuário pode ter muitos hábitos![m
+[32m+[m[32m    public function habits (): HasMany{[m
+[32m+[m[32m        return $this->hasMany(Habit::class);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // Um usuário pode ter muitos registros de hábitos![m
+[32m+[m[32m    public function habitLogs(): HasMany[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return $this->hasMany(HabitLog::class);[m
+[32m+[m[32m    }[m
+ }[m
