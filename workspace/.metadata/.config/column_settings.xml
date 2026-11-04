@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+	<item id="NodeList/MySQLTable">
+		<column name="Nome da tabela" visible="true" order="0" width="100"/>
+		<column name="Motor" visible="true" order="1" width="100"/>
+		<column name="Auto-incremento" visible="true" order="2" width="106"/>
+		<column name="Comprimento de dados" visible="true" order="3" width="140"/>
+		<column name="Particionada" visible="true" order="4" width="100"/>
+		<column name="Descrição" visible="true" order="5" width="100"/>
+	</item>
+</items>
