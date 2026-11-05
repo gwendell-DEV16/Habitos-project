@@ -43,5 +43,7 @@ Route::get('/dashboard/create', [HabitController::class, 'create'])
 
 Route::post('/dashboard/habits', [HabitController::class, 'store'])
     ->name('habits.store');
+Route::delete('/dashboard/habits/{habit}', [HabitController::class, 'destroy'])
+    ->name('habits.destroy');
 
 });

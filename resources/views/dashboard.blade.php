@@ -4,8 +4,7 @@
             Dashboard
         </h1>
 
-        <a href="{{ route('habits.create') }}"
-            class="inline-block px-3 py-1.5 border-2 bg-white font-bold text-sm">
+        <a href="{{ route('habits.create') }}" class="inline-block px-3 py-1.5 border-2 bg-white font-bold text-sm">
             Cadastrar novo hábito
         </a>
 
@@ -37,6 +36,15 @@
                             <p>
                                 [{{ $item->habitLogs->count() }}]
                             </p>
+                            <form action="{{ route('habits.destroy', $item) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit"
+                                    class="bg-red-500 text-white p-1 hover:opacity-50 cursor-pointer">
+                                    <x-icons.trash />
+                                </button>
+                            </form>
                         </div>
                     </li>
                 @empty
@@ -47,11 +55,6 @@
                     <p>
                         Ainda não há hábitos cadastrados.
                     </p>
-
-                    <a href="{{ route('habits.create') }}"
-                        class="bg-white p-2 border-2">
-                        Cadastre um novo hábito
-                    </a>
                 @endforelse
             </ul>
         </div>

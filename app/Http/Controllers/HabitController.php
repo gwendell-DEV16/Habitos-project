@@ -61,8 +61,17 @@ class HabitController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Habit $habit)
-    {
-        //
-    }
-}
+{
+    $user = Auth::user();
 
+    if ($habit->user_id != $user->getAuthIdentifier()) {
+        abort(403, 'Você não tem permissão para excluir este hábito.');
+    }
+
+    $habit->delete();
+
+    return redirect()
+        ->route('site.dashboard')
+        ->with('success', 'Hábito excluído com sucesso!');
+}
+}
