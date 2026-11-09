@@ -11,10 +11,11 @@ class Habit extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'name',
-    ];
+   protected $fillable = [
+    'name',
+    'description',
+    'user_id'
+];
 
     // Um hábito pertence a um usuário
     public function user(): BelongsTo

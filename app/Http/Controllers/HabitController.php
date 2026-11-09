@@ -8,6 +8,7 @@ use App\Http\Requests\HabitRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class HabitController extends Controller
 {
@@ -30,36 +31,30 @@ class HabitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(HabitRequest $request)
-    {
-        $validated = $request->validated();
+    public function update(HabitRequest $request, Habit $habit)
+{
+    $userId = Auth::id();
 
-        /** @var User $user */
-        $user = Auth::user();
+if ($habit->user_id != $userId) {
+    abort(403, 'Você não tem permissão para atualizar este hábito.');
+}
 
-        $user->habits()->create($validated);
+    $habit->update($request->all());
 
-        return redirect()
-            ->route('site.dashboard')
-            ->with('success', 'Hábito criado com sucesso!');
+    return redirect()
+        ->route('site.dashboard')
+        ->with('success', 'Hábito atualizado com sucesso!');
+}
+
+public function edit(Habit $habit)
+{
+    if ($habit->user_id != Auth::id()) {
+        abort(403, 'Você não tem permissão para editar este hábito.');
     }
 
-    public function edit(Habit $habit)
-    {
-        //
-    }
+    return view('edit', compact('habit'));
+}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Habit $habit)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Habit $habit)
 {
     $user = Auth::user();
