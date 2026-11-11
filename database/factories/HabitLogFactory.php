@@ -3,12 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Habit;
+use App\Models\HabitLog;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Habit>
+ * @extends Factory<HabitLog>
  */
-class HabitFactory extends Factory
+class HabitLogFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,15 +18,9 @@ class HabitFactory extends Factory
      */
     public function definition(): array
     {
-        $habits = [
-            'Exercício físico',
-            'Leitura',
-            'Dormir cedo',
-
-        ];
         return [
-            'user_id' => '1',
-            'name' => $this->faker->unique()->randomElement($habits),
+            'habit_id' => HabitLog::factory()
+                ->for(Habit::factory()),
         ];
     }
 }

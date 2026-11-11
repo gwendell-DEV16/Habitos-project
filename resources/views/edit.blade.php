@@ -6,7 +6,7 @@
 
         <section class="bg-white max-w-[600px] mx-auto p-10 pb-6 border-2 mt-4">
 
-            <form action="{{ route('habit.update', $habit->id) }}" method="POST">
+            <form action="{{ route('habits.update', $habit->id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -34,7 +34,7 @@
                     Salvar alterações
                 </button>
 
-                <a href="{{ route('site.dashboard') }}" class="ml-2 p-2 border-2">
+                <a href="{{ route('habits.index') }}" class="ml-2 p-2 border-2">
                     Voltar
                 </a>
             </form>

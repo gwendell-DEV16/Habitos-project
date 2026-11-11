@@ -18,7 +18,7 @@
 
         <div>
             <h2 class="text-xl mt-4">
-                Listagem de hábitos
+                Listagem de hábitos cadastrados
             </h2>
 
             <ul class="flex flex-col gap-2">
@@ -36,8 +36,8 @@
                             <p>
                                 [{{ $item->habitLogs->count() }}]
                             </p>
-                            <a class="bg-white-500 p-1 hover:opacity-50 "href="{{ route('habit.edit', $item->id) }}">
-                            <x-icons.edit />
+                            <a class="bg-white-500 p-1 hover:opacity-50 "href="{{ route('habits.edit', $item->id) }}">
+                                <x-icons.edit />
                             </a>
                             <form action="{{ route('habits.destroy', $item) }}" method="POST">
                                 @csrf
@@ -51,13 +51,13 @@
                         </div>
                     </li>
                 @empty
-                    <li>
-                        Nenhum hábito cadastrado.
-                    </li>
-
                     <p>
-                        Ainda não há hábitos cadastrados.
+                        Nenhum hábito cadastrado.
                     </p>
+
+                    <a href="{{ route('habits.create') }}" class="bg-white border-2 p-2 mb-4 text-sm rounded-md w-fit font-bold inline-block px-3 py-1.5">
+                        Cadastrar um novo hábito
+                    </a>
                 @endforelse
             </ul>
         </div>

@@ -34,7 +34,7 @@
                     Salvar hábito
                 </button>
 
-                <a href="{{ route('site.dashboard') }}" class="ml-2 p-2 border-2">
+                <a href="{{ route('habits.index') }}" class="ml-2 p-2 border-2">
                     Voltar
                 </a>
             </form>
