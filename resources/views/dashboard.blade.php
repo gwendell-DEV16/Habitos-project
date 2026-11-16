@@ -1,12 +1,7 @@
 <x-layout>
-    <main class="py-10 min-h-[calc(100vh-160px)]">
-        <h1 class="font-bold text-4xl text-center">
-            Dashboard
-        </h1>
+    <main class="py-10 min-h-[calc(100vh-160px)] px-4">
 
-        <a href="{{ route('habits.create') }}" class="inline-block px-3 py-1.5 border-2 bg-white font-bold text-sm">
-            Cadastrar novo hábito
-        </a>
+      <x-navbar/>
 
         @session('success')
             <div class="flex">
@@ -17,37 +12,22 @@
         @endsession
 
         <div>
-            <h2 class="text-xl mt-4">
-                Listagem de hábitos cadastrados
+            <h2 class="text-lg mt-8 mb-2">
+                {{ date ('d/m/Y') }}
             </h2>
 
             <ul class="flex flex-col gap-2">
                 @forelse ($habits as $item)
-                    <li class="pl-4">
+                    <li class="habit-shadow-lg p-2 bg-[#FFDAAC]">
                         <div class="flex gap-2 items-center">
-                            <p class="font-bold text-xl">
-                                - {{ $item->name }}
+                          <input type="checkbox" class="w-6 h-6" {{ $item ->is_completed ? 'checked' : '' }} disabled />
+                            <p class="font-bold text-lg">
+                                 {{ $item->name }}
 
                                 <span class="font-light text-md">
                                     ({{ $item->created_at->format('d/m/Y') }})
                                 </span>
                             </p>
-
-                            <p>
-                                [{{ $item->habitLogs->count() }}]
-                            </p>
-                            <a class="bg-white-500 p-1 hover:opacity-50 "href="{{ route('habits.edit', $item->id) }}">
-                                <x-icons.edit />
-                            </a>
-                            <form action="{{ route('habits.destroy', $item) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit"
-                                    class="bg-red-500 text-white p-1 hover:opacity-50 cursor-pointer">
-                                    <x-icons.trash />
-                                </button>
-                            </form>
                         </div>
                     </li>
                 @empty

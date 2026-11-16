@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Redirect;
 class HabitController extends Controller
 {
     public function index(): View
-{
+    {
 
-    $user = Auth::user();
+        $user = Auth::user();
 
-    $habits = $user->habits;
+        $habits = $user->habits;
 
-    return view('dashboard', compact('habits'));
-}
+        return view('dashboard', compact('habits'));
+    }
     /**
      * Display a listing of the resource.
      */
@@ -37,18 +37,18 @@ class HabitController extends Controller
      */
 
     public function store(HabitRequest $request)
-{
-    /** @var User $user */
-    $user = Auth::user();
+    {
+        /** @var User $user */
+        $user = Auth::user();
 
-    $validated = $request->validated();
+        $validated = $request->validated();
 
-    $user->habits()->create($validated);
+        $user->habits()->create($validated);
 
-    return redirect()
-        ->route('habits.index')
-        ->with('success', 'Hábito criado com sucesso!');
-}
+        return redirect()
+            ->route('habits.index')
+            ->with('success', 'Hábito criado com sucesso!');
+    }
     public function update(HabitRequest $request, Habit $habit)
     {
         $userId = Auth::id();
@@ -65,13 +65,13 @@ class HabitController extends Controller
     }
 
     public function edit(Habit $habit): View
-{
-    if ($habit->user_id != Auth::id()) {
-        abort(403, 'Você não tem permissão para editar este hábito.');
-    }
+    {
+        if ($habit->user_id != Auth::id()) {
+            abort(403, 'Você não tem permissão para editar este hábito.');
+        }
 
-    return view('edit', compact('habit'));
-}
+        return view('edit', compact('habit'));
+    }
 
     public function destroy(Habit $habit)
     {
@@ -86,5 +86,14 @@ class HabitController extends Controller
         return redirect()
             ->route('habits.index')
             ->with('success', 'Hábito excluído com sucesso!');
+    }
+
+    public function settings()
+    {
+        $user = Auth::user();
+
+        $habits = $user->habits;
+
+        return view('habits.settings', compact('habits'));
     }
 }
